@@ -42,11 +42,16 @@ public class ParkingApp {
                             break;
                         default:
                             System.out.println("Vehicle not found");
-
                     }
+                    break;
+                case 0:
+                    System.out.println("Thank you for using the application.");
+                    exit = true;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Option not valid");
             }
         } while (!exit);
-
     }
 
     public static byte menu() {
@@ -66,9 +71,7 @@ public class ParkingApp {
             }
         } while (option < MINIMUM || option > MAXIMUM);
         return option;
-
     }
-
 
     public static void addVehicles() {
         Bike bike = new Bike("bike");
@@ -83,7 +86,7 @@ public class ParkingApp {
     }
 
     public static void showVehicles() {
-        vehicles.forEach((value, vehicle) -> System.out.println(value + vehicle.getName()));
+        vehicles.forEach((value, vehicle) -> System.out.println(value +" - "+ vehicle.getName()));
     }
 
     public static Vehicle findVehicle() {
