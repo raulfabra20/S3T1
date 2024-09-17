@@ -1,6 +1,7 @@
 package n1.models;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Undo {
 
@@ -19,14 +20,33 @@ public class Undo {
         return instance;
     }
 
-    public void addOrder(String order){
+    public void addOrder(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Insert the order: ");
+        String order = sc.nextLine();
         orders.add(order);
         System.out.println("Order added successfully.");
     }
 
-    public void removeOrder(String order){
-        orders.remove(order);
-        System.out.println("Order removed successfully.");
+    public void removeOrder(){
+        Scanner sc = new Scanner(System.in);
+
+        try{
+            System.out.println("Insert the order wanted to be removed:");
+            String order = sc.nextLine();
+            String checkedOrder = findOrder(order);
+
+            if(checkedOrder != null){
+                orders.remove(checkedOrder);
+                System.out.println("Order removed successfully.");
+            } else {
+                throw  new OrderNotFoundException("The order does not exist");
+            }
+
+        }catch (OrderNotFoundException e){
+            System.out.println("Error: "+e.getMessage());
+        }
     }
 
     public void showOrders() {
